@@ -18,7 +18,7 @@ RUN APP_ENV=prod composer install \
 
 #----------------------------------------------------
 
-FROM local/php:latest as app
+FROM europe-west4-docker.pkg.dev/spain-iac-common-7epn/spain-base-images/php:8.1.22-20230828_142922 as app
 
 WORKDIR /var/www/html
 
@@ -31,5 +31,6 @@ COPY --from=bootstrap-composer /app/ .
 
 COPY --from=bootstrap-composer /usr/bin/composer /usr/bin/composer
 
+CMD ["symfony","server:start","--port=8080"]
 
 # USER www-data
